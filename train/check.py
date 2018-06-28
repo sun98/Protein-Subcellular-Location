@@ -5,6 +5,8 @@ import os
 import tensorflow as tf
 import numpy as np
 
+import _import_helper
+
 from config import CKPT_PREFIX
 from data_process.data_preprocessor import generate_patch
 from data_process.image_preprocessor import ImagePreprocessor
@@ -13,13 +15,13 @@ TARGET_LABELS = [0, 1, 2, 3, 4, 5]
 
 
 def get_data_trainset(dataset_path):
-    image_pre = ImagePreprocessor(base_dir=dataset_path, data_dir=os.path.join(dataset_path, 'data'))
+    image_pre = ImagePreprocessor(base_dir=dataset_path, data_dir=os.path.join(dataset_path, 'testdata'))
     l1, l2, d = image_pre.get_dataset_patched(size=20, data_selection='all', label_type='int', exist='new')
     return l1, l2, d
 
 
 def get_data(dataset_path):
-    image_pre = ImagePreprocessor(base_dir=dataset_path, data_dir=os.path.join(dataset_path, 'data'))
+    image_pre = ImagePreprocessor(base_dir=dataset_path, data_dir=os.path.join(dataset_path, 'testdata'))
     vals, data = image_pre.get_valset_patched(exist='new')
     data = [piece[-30:] for piece in data]
     return vals, data
@@ -90,7 +92,7 @@ def main(dataset_path):
             results[vals[i][0]] = pred
 
     print(results)
-    with open("D:/Computer Science/Github/Protein-Subcellular-Location/model/result.csv", "w") as f:
+    with open("D:/All_Projects/py/Protein-Subcellular-Location/model/result110.csv", "w") as f:
         for val in results.keys():
             probs = ",".join([str(x[0]) for x in np.mean(results[val], axis=0).tolist()])
             res = "{0},{1}\n".format(val, probs)
@@ -98,7 +100,7 @@ def main(dataset_path):
 
 
 if __name__ == '__main__':
-    dataset_path = "D:/Computer Science/dataset/HPA_ieee_test"
+    dataset_path = "D:/All_Projects/ML_project/HPA_ieee_test_new"
     # generate_patch(dataset_path)
     # main_trainset(dataset_path)
     main(dataset_path)

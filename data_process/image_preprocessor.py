@@ -400,10 +400,10 @@ if __name__ == '__main__':
 
     # sample usage
     # image_pre = ImagePreprocessor(base_dir=args.base_dir)
-    image_pre = ImagePreprocessor(data_dir='D:\\All_Projects\\ML_project\\HPA_ieee', new_dir_name='val_new')
+    image_pre = ImagePreprocessor(data_dir='D:/All_Projects/ML_project/HPA_ieee_test_new/testdata', new_dir_name='new')
     image_pre.generate_patches()
     # for l1, l2, d in image_pre.get_dataset_patched(size=20, data_selection='all', label_type='int', exist='new'):
     #     print(l1, l2, len(d), numpy.array(d).shape)
-    a_name, d = image_pre.get_valset_patched(exist='val_new')
-    for i in range(len(a_name)):
-        print(a_name[i][0], numpy.array(d[i]).shape)
+    # a_name, d = image_pre.get_valset_patched(exist='val_new')
+    # for i in range(len(a_name)):
+    #     print(a_name[i][0], numpy.array(d[i]).shape)
